@@ -1,4 +1,4 @@
-package com.webster.learn.s03shiro;
+package com.webster.learn.s03shiro.security;
 
 import com.webster.learn.s03shiro.controller.LearnLoginController;
 import org.apache.commons.lang3.StringUtils;

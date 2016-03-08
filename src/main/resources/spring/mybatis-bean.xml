@@ -25,7 +25,7 @@
 
     <!-- s02  自动扫描mappers -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.webster./**/.mapper"/>
+        <property name="basePackage" value="com.webster.**.mapper"/>
         <!---根据自己的项目路径配置-->
     </bean>
 

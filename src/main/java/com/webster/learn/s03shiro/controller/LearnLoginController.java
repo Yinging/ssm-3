@@ -1,7 +1,6 @@
 package com.webster.learn.s03shiro.controller;
 
 
-import com.webster.learn.s03shiro.util.UserUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,19 +14,23 @@ public class LearnLoginController {
 	public static Logger log = LoggerFactory.getLogger(LearnLoginController.class);
 
 
+    /*显示登录界面*/
     @RequestMapping(value = "login",method = RequestMethod.GET)
-         public String login() {
+    public String login() {
+        /*todo 判断用户已登录,则跳转首页*/
         return "learn/login";
     }
 
+
+    /*登出的实现由FormAuthenticationFilter提供*/
     @RequestMapping(value = "login",method = RequestMethod.POST)
     public String loginPost() {
         return "learn/login";
     }
 
+    /*登出的实现由Shiro提供*/
     @RequestMapping(value = "logout",method = RequestMethod.GET)
     public String logout() {
-        UserUtils.logout();
         return "learn/learn";
 
     }

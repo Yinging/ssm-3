@@ -63,12 +63,12 @@ td {
 			</tr>
 			<tr>
 				<td class="left">username:</td>
-				<td><input type="text" name="username" value="zhangsan"/>
+				<td><input type="text" name="username" value="linda"/>
 				</td>
 			</tr>
 			<tr>
 				<td class="left">password:</td>
-				<td><input type="text" name="password" value="33333"/></td>
+				<td><input type="text" name="password" value="111111"/></td>
 			</tr>
             <tr>
                 <td class="left">Remember Me</td>

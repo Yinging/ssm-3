@@ -1,4 +1,4 @@
-package com.webster.learn.s03shiro;
+package com.webster.learn.s03shiro.security;
 
 import com.webster.learn.s02mybatis.entity.Learner;
 import com.webster.learn.s02mybatis.service.LearnerService;

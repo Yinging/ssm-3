@@ -1,4 +1,4 @@
-package com.webster.learn.s03shiro;
+package com.webster.learn.s03shiro.security;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

@@ -14,11 +14,11 @@
     </select>
 
     <insert id="insert" parameterType="com.webster.learn.s02mybatis.entity.Learner">
-        INSERT INTO learner(name,password,age) VALUES(#{name},#{password},#{age})
+        INSERT INTO learner(name,password,age,salt) VALUES(#{name},#{password},#{age},#{salt})
     </insert>
 
     <update id="update" parameterType="com.webster.learn.s02mybatis.entity.Learner">
-        UPDATE learner SET name=#{name}, password=#{password} ,age=#{age}  WHERE id=#{id}
+        UPDATE learner SET name=#{name}, password=#{password} ,age=#{age} ,salt=#{salt} WHERE id=#{id}
     </update>
 
     <delete id="delete" parameterType="Integer">
