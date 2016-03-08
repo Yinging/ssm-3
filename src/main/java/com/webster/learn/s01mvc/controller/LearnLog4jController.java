@@ -1,6 +1,5 @@
 package com.webster.learn.s01mvc.controller;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -15,11 +14,12 @@ import java.io.IOException;
  * Created by Webster on 2016/3/1.
  */
 @Controller
-@RequestMapping("/learn/log")
+@RequestMapping("learn/log")
 public class LearnLog4jController {
 
     public static Logger log = LoggerFactory.getLogger(LearnLog4jController.class);
     public String returnView = "learn/learn";
+
     Integer id = 123455555;
     String symbol = "占位符";
 
@@ -31,6 +31,7 @@ public class LearnLog4jController {
         log.warn("warn信息");
         log.error("error信息");
         return returnView;
+
     }
 
     @RequestMapping(value = "debug", method = RequestMethod.GET)

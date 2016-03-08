@@ -23,6 +23,10 @@
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
+    <!--s02 EHCache结束监听。如果不加，EHCache不会自动结束，端口不释放-->
+    <listener>
+        <listener-class>net.sf.ehcache.constructs.web.ShutdownListener</listener-class>
+    </listener>
     <!--
     ********************************************************************************
     *        过滤器
@@ -81,7 +85,20 @@
         <servlet-name>mvc-dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <!--
+    ********************************************************************************
+    *       Druid状态监视
+    ********************************************************************************
+    -->
+    <!--s02 druid 可访问连接池状态-->
+    <servlet>
+        <servlet-name>DruidStatView</servlet-name>
+        <servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DruidStatView</servlet-name>
+        <url-pattern>/druid/*</url-pattern>
+    </servlet-mapping>
 
     <!--
     ********************************************************************************

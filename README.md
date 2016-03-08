@@ -1,4 +1,4 @@
-# ssmss
+# ssm
 
 ## 介绍
 spring springMVC mybatis 组装的脚手架。注释详细, 示例清晰。一步一步的实现，清可以从任何一个commit开始
@@ -23,7 +23,8 @@ spring springMVC mybatis 组装的脚手架。注释详细, 示例清晰。一�
 * **Rest风格URL**  : 整洁
 
 #### 每一步的提交
-* **s01**  : 整合spring + springMVC + slf4j + rest风格URL示例
+* **s01**  : 整合Spring + SpringMVC + slf4j + Rest风格URL示例
+* **s02**  : 整合Mybatis + Druid + EHCache
 
 
 

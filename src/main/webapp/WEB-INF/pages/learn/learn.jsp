@@ -5,22 +5,33 @@
 </head>
 
 <body>
+<h3>------------ s2 Mybatis-------------------</h3>
+<div>
 
+<a href="${pageContext.request.contextPath}/learn/mybatis/get/1">用户1</a>&nbsp;|&nbsp;
+<a href="${pageContext.request.contextPath}/learn/mybatis/get/2">用户2</a>&nbsp;|&nbsp;
+<a href="${pageContext.request.contextPath}/learn/mybatis/get/3">用户3</a>&nbsp;|&nbsp;
+</div>
 
-<div style="float: left;clear: both">
-    <h3>------------ step-03 REST风格的url映射-------------------</h3>
+<P></P>
+<P></P>
 
+<h3>------------ s1 SpringMVC-------------------</h3>
+
+<div>
     <a href="${pageContext.request.contextPath}/learn/mvc/json"> 直接返回json</a>&nbsp;|&nbsp;
     <a href="${pageContext.request.contextPath}/learn/mvc/cn">产生乱码的解决</a>&nbsp;|&nbsp;
     <a href="${pageContext.request.contextPath}/learn/mvc/map">传参</a>&nbsp;|&nbsp;
-
-    <br>
+</div>
+<P></P>
+<div >
     <a href="${pageContext.request.contextPath}/learn/log">log</a>&nbsp;|&nbsp;
     <a href="${pageContext.request.contextPath}/learn/log/debug">debug</a>&nbsp;|&nbsp;
     <a href="${pageContext.request.contextPath}/learn/log/error">error</a>&nbsp;|&nbsp;
     <a href="${pageContext.request.contextPath}/learn/log/exception">异常抛出</a>&nbsp;|&nbsp;
-    <br>
-
+</div>
+<P></P>
+<div>
     <form action="${pageContext.request.contextPath}/learn/rest/1" method="get">
         <button type="submit">获取-get</button>
     </form>

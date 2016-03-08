@@ -18,10 +18,20 @@
         <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.RestController"/>
     </context:component-scan>
 
+    <!-- s02 加载配置文件-->
+    <context:property-placeholder location="classpath:app.properties" ignore-resource-not-found="true" ignore-unresolvable="true"/>
+
+
     <!-- s01 View 视图解析器 -->
-    <import resource="classpath:spring/bean/view-bean.xml"/>
+    <import resource="classpath:spring/view-bean.xml"/>
     <!-- s01 Log4j 日志-->
-    <import resource="classpath:spring/bean/log4j-bean.xml"/>
+    <import resource="classpath:spring/log4j-bean.xml"/>
+    <!-- s02 Druid 连接池-->
+    <import resource="classpath:spring/druid-bean.xml"/>
+    <!-- s02 Mybatis 数据库dao-->
+    <import resource="classpath:spring/mybatis-bean.xml"/>
+    <!-- s02 EHCache 缓存-->
+    <import resource="classpath:spring/ehcache-bean.xml"/>
 
 
 

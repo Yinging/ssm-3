@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webster.learn.s02mybatis.mapper.LearnerMapper">
+
+    <!--使用缓存-->
+    <cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
+
+    <select id="countAll" resultType="int">
+        SELECT count(*) FROM learner;
+    </select>
+
+    <select id="selectAll" resultType="com.webster.learn.s02mybatis.entity.Learner">
+        SELECT * FROM learner ORDER BY id ASC
+    </select>
+
+    <insert id="insert" parameterType="com.webster.learn.s02mybatis.entity.Learner">
+        INSERT INTO learner(name,password,age) VALUES(#{name},#{password},#{age})
+    </insert>
+
+    <update id="update" parameterType="com.webster.learn.s02mybatis.entity.Learner">
+        UPDATE learner SET name=#{name}, password=#{password} ,age=#{age}  WHERE id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM learner WHERE id=#{id}
+    </delete>
+
+    <select id="findById" parameterType="Integer" resultType="com.webster.learn.s02mybatis.entity.Learner">
+        SELECT * FROM learner WHERE id=#{id}
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="com.webster.learn.s02mybatis.entity.Learner">
+        SELECT * FROM learner WHERE name=#{name}
+    </select>
+</mapper>

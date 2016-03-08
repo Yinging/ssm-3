@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by Webster on 2016/2/18.
  */
 @Controller
-@RequestMapping("/learn/rest")
+@RequestMapping("learn/rest")
 public class LearnRestController {
 
     /*
