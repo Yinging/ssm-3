@@ -5,6 +5,13 @@
 </head>
 
 <body>
+<h3>------------ s3 Shiro-------------------</h3>
+<div>
+    <a href="${pageContext.request.contextPath}/learn/logout"> 登出</a>&nbsp;|&nbsp;
+</div>
+
+<P></P>
+<P></P>
 <h3>------------ s2 Mybatis-------------------</h3>
 <div>
 

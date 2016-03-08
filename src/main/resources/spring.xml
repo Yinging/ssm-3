@@ -32,6 +32,8 @@
     <import resource="classpath:spring/mybatis-bean.xml"/>
     <!-- s02 EHCache 缓存-->
     <import resource="classpath:spring/ehcache-bean.xml"/>
+    <!-- s03 Shiro 用户认证-->
+    <import resource="classpath:spring/shiro-bean.xml"/>
 
 
 
