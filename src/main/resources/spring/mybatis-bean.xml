@@ -16,23 +16,39 @@
         <!--数据源-->
         <property name="dataSource" ref="dataSource"/>
         <!--类简化前缀-->
-        <property name="typeAliasesPackage" value="com.learn.step05mybatis.entity"/>
+        <property name="typeAliasesPackage" value="com.webster.learn.s02mybatis.entity"/>
         <!--mybatis配置文件路径-->
         <property name="configLocation" value="classpath:config/mybatis.xml"/>
         <!-- Mapper xml -->
         <property name="mapperLocations" value="classpath:com/webster/**/*Mapper.xml"/>
     </bean>
 
-    <!-- s02  自动扫描mappers -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <!-- s02-p1 通用mapper配置-->
+    <bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.webster.**.mapper"/>
-        <!---根据自己的项目路径配置-->
+        <!--继承通用Mapper的才会被扫描-->
+        <property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
     </bean>
+
+    <!-- s02  自动扫描mappers -->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="basePackage" value="com.webster.**.mapper"/>-->
+        <!--&lt;!&ndash;-根据自己的项目路径配置&ndash;&gt;-->
+    <!--</bean>-->
 
     <!-- s02 把mybatis的事务交由spring去管理-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"/>
         <!--注意：此处的数据源要与sqlSessionFactory中的dataSource相同-->
+    </bean>
+
+
+
+
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
+          scope="prototype">
+        <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
 

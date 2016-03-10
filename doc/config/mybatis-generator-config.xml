@@ -9,7 +9,15 @@
 ********************************************************************************
 -->
 <generatorConfiguration>
-    <context id="DB2Tables" targetRuntime="MyBatis3">
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <!-- s02-p1 通用mapper使用的generator 详见http://git.oschina.net/free/Mapper/blob/master/wiki/mapper3/7.UseMBG.md-->
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
+            <property name="caseSensitive" value="true"/>
+        </plugin>
+
+
         <!--去除注释  -->
         <commentGenerator>
             <property name="suppressAllComments" value="true" />
@@ -35,8 +43,10 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="${javaClientPackage}" targetProject="${srcMainJava}"/>
 
 
-        <!--要生成mybatis文件的数据库表-->
+        <!--要生成mybatis文件的数据库表,可使用%表示所有的表-->
         <table tableName="country">
+            <!--表示所有的表都有一个id自增的主键，在生成实体类的时候会根据该配置生成相应的注解-->
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
             <!--忽略表中一个叫"fred"的列-->
             <!--<ignoreColumn column="fred"/>-->
             <!--对于列"BEG_DATA"列,生成的属性名是"startDate".-->

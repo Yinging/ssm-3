@@ -16,5 +16,6 @@
     </settings>
 
 
+
     <!--省略了mappers配置，前提是：xxMapper.xml配置文件放在和xxMapper.java统一目录下-->
 </configuration>
