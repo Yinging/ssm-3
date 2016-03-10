@@ -4,6 +4,5 @@
 *.iml
 out
 build
-gen
 classes
 logs

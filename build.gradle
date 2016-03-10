@@ -15,6 +15,8 @@ repositories {
 configurations {
     //1. 引入包里排除 commons-logging ，因为我们用 SLF4j
     all*.exclude group: "commons-logging", module: "commons-logging"
+    //定义mybatis-generator的依赖
+    mybatisGenerator
 }
 dependencies {
     /*
@@ -55,6 +57,10 @@ dependencies {
     compile 'org.mybatis.caches:mybatis-ehcache:1.0.3'
     //Spring的mvc扩展支持包,使用EHCache / Freemarker 必须添加此包
     compile 'org.springframework:spring-context-support:4.2.5.RELEASE'
+    //s02-p1 mybatis文件生成器,根据数据库表生成实体类和xml的Dao文件.
+    mybatisGenerator 'org.mybatis.generator:mybatis-generator-core:1.3.2'
+    mybatisGenerator 'mysql:mysql-connector-java:5.1.36'
+    mybatisGenerator 'tk.mybatis:mapper:3.3.1'
     /*
     |--------------------------------------------------------------------------
     |  s03 Shiro
@@ -75,4 +81,86 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.4'
 
 
+
+}
+
+/*
+ |--------------------------------------------------------------------------
+ |  s02-p1 以下是定义mybatis-generator的gradle启动
+ |--------------------------------------------------------------------------
+ */
+
+/**
+ * 配置插件引用
+ */
+buildscript {
+    //插件仓库
+    repositories {
+        maven {
+            url 'http://repo1.maven.org/maven2/'
+        }
+    }
+    //插件依赖
+    dependencies {
+        classpath: 'mysql:mysql-connector-java:5.1.+'
+    }
+}
+
+/**
+ * 引入属性值
+ */
+ext {
+    def prop = new Properties();
+    file("src/main/resources/app.properties").withInputStream {
+        prop.load(it)
+    }
+    prop.each {
+        project.extensions.add("$it.key", it.value);
+
+    }
+}
+
+/**
+ *  定义一个任务
+ *  mybatis-generate 加载配置，调用jar，生成mybatis文件
+ */
+task mybatisGenerate << {
+    //ant读取配置
+    ant.properties['targetProject'] = projectDir.path
+    ant.properties['driverClass'] = project['jdbc.driverClassName']
+    ant.properties['connectionURL'] = project['jdbc.url']
+    ant.properties['userId'] = project['jdbc.username']
+    ant.properties['password'] = project['jdbc.password']
+    ant.properties['srcMainJava'] = sourceSets.main.java.srcDirs[0].path
+    ant.properties['srcMainResources'] = sourceSets.main.resources.srcDirs[0].path
+    ant.properties['javaModelPackage'] = this.javaModelPackage
+    ant.properties['sqlMapPackage'] = this.sqlMapPackage
+    ant.properties['javaClientPackage'] = this.javaClientPackage
+
+
+    //注入ant任务
+    ant.taskdef(
+            name: 'mbgenerator',
+            classname: 'org.mybatis.generator.ant.GeneratorAntTask',
+            classpath: configurations.mybatisGenerator.asPath,
+    )
+
+    //运行ant任务，生成mybatis文件
+    ant.mbgenerator(
+            //引入配置文件，
+            verbose: true, configfile: 'doc/config/mybatis-generator-config.xml',  overwrite: true,) {
+        //将以下变量引入到配置文件中
+        propertyset {
+            propertyref(name: 'targetProject')
+            propertyref(name: 'userId')
+            propertyref(name: 'driverClass')
+            propertyref(name: 'connectionURL')
+            propertyref(name: 'password')
+            propertyref(name: 'srcMainJava')
+            propertyref(name: 'srcMainResources')
+            propertyref(name: 'javaModelPackage')
+            propertyref(name: 'sqlMapPackage')
+            propertyref(name: 'javaClientPackage')
+        }
+    }
 }
