@@ -1,4 +1,4 @@
-package com.webster.learn.s03shiro.security;
+package com.webster.learn.s03shiro.security.filter;
 
 import com.webster.learn.s03shiro.controller.LearnLoginController;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +15,7 @@ import javax.servlet.ServletResponse;
  * 自定义表单过滤器，只是添加了几个异常扑捉，之后输出到views
  * Created by Vince on 2016/3/8.
  */
-public class LearnFormAuthenticationFilter extends FormAuthenticationFilter {
+public class MyFormAuthenticationFilter extends FormAuthenticationFilter {
 
     public static Logger log = LoggerFactory.getLogger(LearnLoginController.class);
 

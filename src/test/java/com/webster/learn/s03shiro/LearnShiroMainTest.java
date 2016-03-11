@@ -1,8 +1,8 @@
 package com.webster.learn.s03shiro;
 
-import com.webster.learn.s02mybatis.entity.Learner;
-import com.webster.learn.s02mybatis.service.LearnerService;
-import com.webster.learn.s03shiro.security.PasswordHelper;
+import com.webster.learn.s02mybatis.entity.User;
+import com.webster.learn.s02mybatis.service.UserService;
+import com.webster.learn.s03shiro.security.realm.PasswordHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,17 +22,16 @@ public class LearnShiroMainTest {
     PasswordHelper passwordHelper;
 
     @Autowired
-    LearnerService learnerService;
+    UserService service;
 
-    @Autowired
-    Learner learner;
 
     @Test
     public void testInsert() throws Exception {
-        learner.setName("linda");
-        learner.setPassword("111111");
-        passwordHelper.encryptPassword(learner);
-        learnerService.insert(learner);
+        User user =new User();
+        user.setUsername("linda");
+        user.setPassword("111111");
+        passwordHelper.encryptPassword(user);
+        service.insert(user);
     }
 
 

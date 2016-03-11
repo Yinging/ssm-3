@@ -1,24 +1,15 @@
 package com.webster.learn.s02mybatis.service;
 
-
 import com.webster.learn.s02mybatis.entity.Car;
-
-import java.util.List;
+import com.webster.learn.s02mybatis.entity.Country;
+import com.webster.learn.s02mybatis.mapper.CarMapper;
+import com.webster.learn.s02mybatis.mapper.CountryMapper;
+import org.springframework.stereotype.Service;
 
 /**
- * 业务层 接口
- * Created by Webster on 2016/2/22.
+ * todo
+ * Created by Webster on 16/3/10.
  */
-public interface CarService {
-    int insert(Car car);
-
-    int update(Car car);
-
-    int delete(Integer id);
-
-    List<Car> selectAll();
-
-    int countAll();
-
-    Car findById(Integer id);
+@Service
+public class CarService extends BaseService<CarMapper,Car> {
 }

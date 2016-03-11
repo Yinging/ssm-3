@@ -13,8 +13,8 @@
 </head>
 <body>
     <p>EHCache-结果页</p>
-    <p>用户名：${requestScope.learner.name}</p>
-    <p>密码：${requestScope.learner.password}</p>
-    <p>年龄：${requestScope.learner.age}</p>
+    <p>用户名：${requestScope.user.username}</p>
+    <p>密码：${requestScope.user.password}</p>
+    <p>年龄：${requestScope.user.age}</p>
 </body>
 </html>

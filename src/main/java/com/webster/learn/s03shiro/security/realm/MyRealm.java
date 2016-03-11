@@ -1,12 +1,13 @@
-package com.webster.learn.s03shiro.security;
+package com.webster.learn.s03shiro.security.realm;
 
-import com.webster.learn.s02mybatis.entity.Learner;
-import com.webster.learn.s02mybatis.service.LearnerService;
+import com.webster.learn.s02mybatis.entity.User;
+import com.webster.learn.s02mybatis.service.UserService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
+import tk.mybatis.mapper.entity.Example;
 
 import javax.annotation.Resource;
 
@@ -14,10 +15,10 @@ import javax.annotation.Resource;
 /**
  * 自定义Realm，相当于Shiro和数据库之间的dao
  */
-public class LearnRealm extends AuthorizingRealm {
+public class MyRealm extends AuthorizingRealm {
 
     @Resource
-    private LearnerService learnService;
+    UserService userService;
 
     /**
      * 回调函数,用于权限验证
@@ -42,33 +43,29 @@ public class LearnRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
         String name = (String) token.getPrincipal();
-        // 调用learnService查询是否有此用户  
-        Learner learner = learnService.findByName(name);
-        if (learner == null) {
+        //查看当前用户是否存在
+        Example example = new Example(User.class);
+        example.createCriteria().andEqualTo("username",name);
+        User user = userService.selectByExample(example).get(0);
+
+        if (user == null) {
             // 抛出 帐号找不到异常
             throw new UnknownAccountException();
         }
-        // 判断帐号是否锁定  
-        if (Boolean.TRUE.equals(learner.getLocked())) {
-            // 抛出 帐号锁定异常  
+        // 判断帐号是否锁定
+        if (user.getLocked().equals(Boolean.TRUE)) {
+            // 抛出 帐号锁定异常
             throw new LockedAccountException();
         }
         // 交给AuthenticatingRealm使用CredentialsMatcher进行密码匹配  
         return new SimpleAuthenticationInfo(
-                learner.getName(), // 用户名
-                learner.getPassword(), // 密码
-                ByteSource.Util.bytes(learner.getCredentialsSalt()),// salt=learnername+salt
+                user.getUsername(), // 用户名
+                user.getPassword(), // 密码
+                ByteSource.Util.bytes(user.getUsername()+user.getSalt()),// salt=username+salt
                 getName() // realm name
         );
 
     }
 
-    /**
-     * 清除缓存
-     */
-    public void clearAllCache() {
-        getAuthenticationCache().clear();
-        getAuthorizationCache().clear();
-    }
 
 }

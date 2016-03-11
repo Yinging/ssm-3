@@ -3,14 +3,31 @@ version '1.0.0'
 
 apply plugin: 'war'
 
-//统一编码为utf-8
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 repositories {
     maven {
         url 'http://repo1.maven.org/maven2/'
     }
 }
+
+/**
+ * 配置插件引用
+ */
+buildscript {
+    //插件仓库
+    repositories {
+        maven {
+            url 'http://repo1.maven.org/maven2/'
+        }
+    }
+    //插件依赖
+    dependencies {
+        classpath: 'mysql:mysql-connector-java:5.1.+'
+    }
+}
+
+//统一编码为utf-8
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 configurations {
     //1. 引入包里排除 commons-logging ，因为我们用 SLF4j
@@ -97,22 +114,6 @@ dependencies {
  */
 
 /**
- * 配置插件引用
- */
-buildscript {
-    //插件仓库
-    repositories {
-        maven {
-            url 'http://repo1.maven.org/maven2/'
-        }
-    }
-    //插件依赖
-    dependencies {
-        classpath: 'mysql:mysql-connector-java:5.1.+'
-    }
-}
-
-/**
  * 引入属性值
  */
 ext {
@@ -130,7 +131,7 @@ ext {
  *  定义一个任务
  *  mybatis-generate 加载配置，调用jar，生成mybatis文件
  */
-task mybatisGenerate << {
+task mbg << {
     //ant读取配置
     ant.properties['targetProject'] = projectDir.path
     ant.properties['driverClass'] = project['jdbc.driverClassName']
@@ -154,7 +155,7 @@ task mybatisGenerate << {
     //运行ant任务，生成mybatis文件
     ant.mbgenerator(
             //引入配置文件，
-            verbose: true, configfile: 'doc/config/mybatis-generator-config.xml',  overwrite: true,) {
+            verbose: true, configfile: 'doc/config/mybatis-generator-config.xml', overwrite: true,) {
         //将以下变量引入到配置文件中
         propertyset {
             propertyref(name: 'targetProject')

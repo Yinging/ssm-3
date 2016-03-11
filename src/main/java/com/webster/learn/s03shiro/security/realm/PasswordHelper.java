@@ -1,6 +1,6 @@
-package com.webster.learn.s03shiro.security;
+package com.webster.learn.s03shiro.security.realm;
 
-import com.webster.learn.s02mybatis.entity.Learner;
+import com.webster.learn.s02mybatis.entity.User;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -18,15 +18,16 @@ public class PasswordHelper {
 	private String algorithmName = "md5";
 	private int hashIterations = 3;
 
-    public void encryptPassword(Learner learner) {
+    public void encryptPassword(User user) {
 
-        learner.setSalt(randomNumberGenerator.nextBytes().toHex());
+        String salt = randomNumberGenerator.nextBytes().toHex();
 
-        String newPassword = new SimpleHash(algorithmName, learner.getPassword(),
-                learner.getCredentialsSalt(),
+        String newPassword = new SimpleHash(algorithmName, user.getPassword(),
+                user.getUsername()+salt,
                 hashIterations).toHex();
 
-        learner.setPassword(newPassword);
+        user.setSalt(salt);
+        user.setPassword(newPassword);
     }
 
 	public void setRandomNumberGenerator(RandomNumberGenerator randomNumberGenerator) {
@@ -45,12 +46,12 @@ public class PasswordHelper {
     /*这是上面代码的简化不规范模式,规范用法是Test文件里的*/
     public static void main(String[] args) {
         String algorithmName = "md5";
-        String learnername = "zhaoliu";
+        String username = "zhaoliu";
         String password = "666666";
         String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
         int hashIterations = 3;
         SimpleHash hash = new SimpleHash(algorithmName, password,
-                learnername + salt, hashIterations);
+                username + salt, hashIterations);
         String encodedPassword = hash.toHex();
         System.out.println("password="+encodedPassword);
         System.out.println("salt="+salt);

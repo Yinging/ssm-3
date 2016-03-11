@@ -1,4 +1,4 @@
-package com.webster.learn.s03shiro.security;
+package com.webster.learn.s03shiro.security.filter;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -19,13 +19,13 @@ import java.util.concurrent.atomic.AtomicInteger;
  * 超过5次抛出异常，之后通过FormAuthenticationFilter捕获异常，禁止登录
  * passwordRetryCache缓存配置的记录时间是10分钟，10分钟后缓存消失，可以登录
  */
-public class LearnRetryLimitHashedCredentialsMatcher extends
+public class RetryLimitHashedCredentialsMatcher extends
         HashedCredentialsMatcher {
-    public static Logger log = LoggerFactory.getLogger(LearnRetryLimitHashedCredentialsMatcher.class);
+    public static Logger log = LoggerFactory.getLogger(RetryLimitHashedCredentialsMatcher.class);
 
     private Cache<String, AtomicInteger> passwordRetryCache;
 
-    public LearnRetryLimitHashedCredentialsMatcher(CacheManager cacheManager) {
+    public RetryLimitHashedCredentialsMatcher(CacheManager cacheManager) {
         passwordRetryCache = cacheManager.getCache("passwordRetryCache");
     }
 

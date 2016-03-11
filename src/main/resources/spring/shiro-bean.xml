@@ -32,11 +32,11 @@
     </bean>
 
     <!--s03 基于Form表单的身份验证过滤器,表单的属性名使用默认的username,password,rememberMe -->
-    <bean id="formAuthenticationFilter" class="com.webster.learn.s03shiro.security.LearnFormAuthenticationFilter"/>
+    <bean id="formAuthenticationFilter" class="com.webster.learn.s03shiro.security.filter.MyFormAuthenticationFilter"/>
 
     <!--s03 密码错误5次以上锁定，凭证匹配器 -->
     <bean id="retryLimitCredentialsMatcher"
-          class="com.webster.learn.s03shiro.security.LearnRetryLimitHashedCredentialsMatcher">
+          class="com.webster.learn.s03shiro.security.filter.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="shiroCacheManager" />
         <property name="hashAlgorithmName" value="md5" />
         <property name="hashIterations" value="3" />
@@ -44,7 +44,7 @@
     </bean>
 
     <!--s03 自定义一个Realm，指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java-->
-    <bean id="myRealm" class="com.webster.learn.s03shiro.security.LearnRealm">
+    <bean id="myRealm" class="com.webster.learn.s03shiro.security.realm.MyRealm">
         <!--增加一个自定义验证,验证多次尝试密码-->
         <property name="credentialsMatcher" ref="retryLimitCredentialsMatcher"/>
     </bean>
