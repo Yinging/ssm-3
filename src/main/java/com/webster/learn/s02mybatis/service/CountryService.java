@@ -2,12 +2,10 @@ package com.webster.learn.s02mybatis.service;
 
 import com.webster.learn.s02mybatis.entity.Country;
 import com.webster.learn.s02mybatis.mapper.CountryMapper;
-import org.springframework.stereotype.Service;
 
 /**
  * todo
- * Created by Webster on 16/3/10.
+ * Created by Webster on 16/3/11.
  */
-@Service
-public class CountryService extends BaseService<CountryMapper,Country> {
+public interface CountryService extends BaseService<CountryMapper,Country>{
 }

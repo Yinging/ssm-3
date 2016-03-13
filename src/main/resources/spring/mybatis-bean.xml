@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        ">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
     <!--
     ********************************************************************************
     *      s02 Mybatis
@@ -31,17 +29,13 @@
         <property name="markerInterface" value="tk.mybatis.mapper.common.Mapper"/>
     </bean>
 
-    <!-- s02 把mybatis的事务交由spring去管理-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-        <!--注意：此处的数据源要与sqlSessionFactory中的dataSource相同-->
-    </bean>
 
     <!-- s02-p1 pagehelper用到-->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"
           scope="prototype">
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
+
 
 
 

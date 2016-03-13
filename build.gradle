@@ -82,7 +82,8 @@ dependencies {
     compile 'tk.mybatis:mapper:3.3.6'
     //s02-p1 分页插件
     compile 'com.github.pagehelper:pagehelper:4.1.2'
-
+    //s02-p2 事务管理
+    compile 'org.aspectj:aspectjweaver:1.8.8'
 
     /*
     |--------------------------------------------------------------------------

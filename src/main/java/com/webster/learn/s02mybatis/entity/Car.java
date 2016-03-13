@@ -14,6 +14,8 @@ public class Car {
 
     private Long price;
 
+    private Integer stock;
+
     /**
      * @return id
      */
@@ -68,5 +70,19 @@ public class Car {
      */
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    /**
+     * @return stock
+     */
+    public Integer getStock() {
+        return stock;
+    }
+
+    /**
+     * @param stock
+     */
+    public void setStock(Integer stock) {
+        this.stock = stock;
     }
 }

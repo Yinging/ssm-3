@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.webster.learn.s02mybatis.mapper.CarMapper" >
-  <resultMap id="BaseResultMap" type="com.webster.learn.s02mybatis.entity.Car" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webster.learn.s02mybatis.mapper.CarMapper">
+  <resultMap id="BaseResultMap" type="com.webster.learn.s02mybatis.entity.Car">
     <!--
       WARNING - @mbggenerated
     -->
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="bland" property="bland" jdbcType="VARCHAR" />
-    <result column="color" property="color" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="bland" jdbcType="VARCHAR" property="bland" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="stock" jdbcType="INTEGER" property="stock" />
   </resultMap>
 </mapper>
